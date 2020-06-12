@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+
+{% block about %}
+	<br>
+	<p>This site is a simple web application of <b>Twitter data streaming and analysis</b>, powered by <b>Twitter API</b>, <b>Python</b>, <b>Flask</b>, and <b>JavaScript</b>.</p>
+
+	<p>It is based on <a href="https://www.pythonforengineers.com/build-a-twitter-analytics-app-using-python/">an online tutorial</a> with some modifications. </p> 
+
+	<p><b>Languages</b> page samples from all Twitter streaming data (say, 1,000 tweets) and displays the language compositions of <b>all tweets </b>  and <b>top tweets</b> (for example, those with over 10,000 retweets) in pie charts. </p>
+
+	<p><b>Top Tweets</b> page shows the top tweets as defined in the Languages page.</p>
+
+	<p><b>Trends</b> page calls Twitter's trend API for all locations (trends_place(1)) and fetches 3 popular tweets for each trending word. This page is updated less frequently than Languages and Top Tweets pages in order to stay under Twitter's API request limit rate. </p>
+
+	<p>* Please note that this web app may stop or pause if it accidentally reaches the API request limit rate.</p>
+
+
+	<br><br>
+	Author:  <b>Kota Minegishi </b> <br>
+	Date:  <b>6/10/2020 </b><br>
+	Last Modified:  <b>recent </b><br>
+{% endblock %}

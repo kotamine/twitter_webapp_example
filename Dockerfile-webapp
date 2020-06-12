@@ -1,0 +1,18 @@
+FROM python:3.7-alpine
+
+COPY flask4.py /flask/ 
+COPY sqldata1.py /flask/
+COPY templates /flask/templates
+COPY static /flask/static
+COPY requirements_webapp.txt /tmp
+
+RUN pip3 install -r /tmp/requirements_webapp.txt
+
+EXPOSE 5000
+
+WORKDIR /flask
+
+# for local testing: flask3.py uses local data
+COPY twitter_data.db /flask/ 
+COPY flask3.py /flask/ 
+CMD ["python3", "flask3.py"]  

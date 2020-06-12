@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  webapp:
+    container_name: webapp
+    build: 
+      context: .
+      dockerfile: Dockerfile-webapp
+    ports:
+      - 5000:5000
+    # restart: always
+    volumes:
+      - web_data:/web_data
+    command: python3 flask4.py
+    # just to keep container running
+    # command: tail -f /dev/null
+
+  twitterdata:
+    container_name: twitterdata
+    build:
+      context: .
+      dockerfile: Dockerfile-twitterdata
+    # restart: always
+    volumes:
+      - web_data:/data
+    # start the program
+    command: python3 trendstream5.py 
+    # just to keep container running
+    # command: tail -f /dev/null 
+
+volumes:
+  web_data:

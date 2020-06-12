@@ -1,0 +1,6 @@
+# twitter_webapp_example/myconfig.py
+
+consumer_key= 'H8zipXQORIOKTCc9QRTDhWBfP'
+consumer_secret= 'rTPTC3CtsS6Im0KVi52kKpagTVmO9Pd4KKJgN4SweGmsPhXN43'
+access_token= '146167412-JnC2AqQoSx3yw6eaP5MfjjuczFvohz1aWXeS99Pp'
+access_secret= '1gGKNVnKnB7djsU87xCJK9EYf2lD1WZ1o47gQ5W6AYm3J'

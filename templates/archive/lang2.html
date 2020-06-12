@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block graphs %}
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+      	// language_data 
+    	var data1 = new google.visualization.DataTable();
+		data1.addColumn('string', 'Language');
+		data1.addColumn('number', 'Usage');
+		data1.addRows({{ language_data | safe }});
+
+		var options1 = {
+			title: 'Most used languages on Twitter: All Tweets',
+			sliceVisibilityThreshold: 0.01,
+			is3D: true
+		};
+
+		// instantiate and draw our chart 
+		var chart1 = new google.visualization.PieChart(document.getElementById('chart_div1'));
+
+		chart1.draw(data1, options1);
+
+		// repeat for top_language_data 
+		var data2 = new google.visualization.DataTable();
+		data2.addColumn('string','Languages');
+		data2.addColumn('number','Usage');
+		data2.addRows({{ top_language_data | safe }});
+
+		var options2 = {
+			title: 'Most used languages on Twitter: Top Tweets',
+			pieHole: 0.4
+		};
+
+		var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+		chart2.draw(data2, options2);
+		}
+    </script>
+
+{% endblock %}
+{% block div %}
+<b>Most used languages on Twitter: All Tweets:</b>
+    <div id="chart_div1" style="width:800; height:600"></div>
+    <div id="chart_div2" style="width:800; height:600"></div>
+<ul>
+<li><a href="/top_tweets">Top Tweets</a></li>
+<li><a href="/trends">Trends</a></li>
+</ul>
+{% endblock %}

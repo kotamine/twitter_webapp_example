@@ -1,0 +1,28 @@
+FROM python:3.7-alpine
+
+COPY trendstream5.py /twit/
+COPY myconfig.py /twit/
+COPY requirements_twit.txt /tmp
+
+# prepopulate with data from local folder
+COPY data /data 
+
+
+# Setting up time zone
+ARG TZ='America/Denver'
+
+ENV DEFAULT_TZ ${TZ}
+
+RUN apk upgrade --update \
+  && apk add -U tzdata \
+  && cp /usr/share/zoneinfo/${DEFAULT_TZ} /etc/localtime \
+  && apk del tzdata \
+  && rm -rf \
+  /var/cache/apk/*
+
+RUN date
+
+RUN pip3 install -r /tmp/requirements_twit.txt
+
+WORKDIR /twit
+CMD ["python3", "trendstream5.py"]

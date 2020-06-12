@@ -1,0 +1,20 @@
+ <!DOCTYPE html>
+ <html>
+	<head>
+		<title>Twitter Webapp Example</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<header></header>
+	<body>
+		<div class="topnav">
+		  <a class="active" href="/">Languages</a>
+		  <a href="/top_tweets">Top Tweets</a>
+		  <a href="/trends">Trends</a>
+		  <a href="/about">About</a>
+		</div> 
+		{% block graphs %} {% endblock %}
+		{% block trends %} {% endblock %}
+		{% block top_tweets %} {% endblock %}
+		{% block about %} {% endblock %}
+	</body>
+</html>

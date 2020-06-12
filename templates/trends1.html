@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block trends %}
+<script>
+	function getTrends() {
+		fetch('/api/trends')
+		.then((response) => {
+			return response.json();
+		})
+		.then((trends) => {
+			// use the data
+			console.log(trends);
+			let trendContainer = document.getElementById("trends");
+			let trendSampleContainer = document.getElementById("trend_sample");
+            // trendContainer.innerHTML = JSON.stringify(trends);
+            var trending = []
+			for (i=0; i<trends.trend.length; i++) {
+     			trending = trending + trends.trend[i] + "<br>";
+			}
+            var tweets = []
+			for (i=0; i<trends.trend_tweet.length; i++) {
+     			if (i==0 | i%3==0) {
+     				tweets = tweets + trends.trend[i/3] + "<ul>";
+     			}
+     			tweets = tweets + "<li>" + trends.trend_tweet[i] + "</li>";
+     			if (i%3==2) { 
+     				tweets = tweets + "</ul>"
+     			}
+			}
+            trendContainer.innerHTML = [
+            	"Date: " + trends.datetime_trends + "<br><br>" +
+            	trending
+            	]
+			trendSampleContainer.innerHTML = tweets
+		})
+	}
+	// call the method once
+	getTrends();
+	// call the method every 60 seconds
+	setInterval(getTrends, 60000);
+</script>
+	<h2> Trending On Twitter: </h2>
+	Updated every 10 to 12 minutes.
+	<div id="trends"></div>
+	<!-- {% for t in trend %}
+	<strong>{{t | safe}}</strong>
+	<br>
+	{% endfor %} -->
+	<h2>Trending Topic Samples:</h2>
+	<div id="trend_sample"></div>
+	<!-- {% for t in trend_tweet %}
+	{{t | safe}}<br>
+	{% endfor %} -->
+
+{% endblock %}

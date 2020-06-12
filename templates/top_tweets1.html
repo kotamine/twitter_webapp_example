@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+
+
+{% block top_tweets %} 
+<script>
+	function getToptweets() {
+		fetch('/api/top_tweets')
+		.then((response) => {
+			return response.json();
+		})
+		.then((top_tweets) => {
+			// use the data
+			//console.log(top_tweets);
+			let trendContainer = document.getElementById("top_tweets");
+			// trendContainer.innerHTML = JSON.stringify(top_tweets);
+			var tweets = []
+			for (i=0; i<top_tweets.tweets.length; i++) {
+     			tweets = tweets + top_tweets.tweets[i] + "<br>";
+			}
+            trendContainer.innerHTML = [
+            	"Date: " + top_tweets.datetime_toptweets + "<br><br>" +
+            	tweets
+            	]
+		})
+	}
+	// call the method once
+	getToptweets();
+	// call the method every XX seconds
+	setInterval(getToptweets, 3000);
+</script>
+		<h2>Most Popular Tweets:</h2>
+		Updated every 20 to 30 seconds.
+		<div id="top_tweets"></div>
+<!-- 		{% for tweet in tweets %}
+			{{ tweet | safe}}<br>
+		{% endfor %} -->
+{% endblock %}
